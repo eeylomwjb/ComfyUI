@@ -1,0 +1,24 @@
+[submodule "custom_nodes/ComfyUI-AnimateDiff-Evolved"]
+	path = custom_nodes/ComfyUI-AnimateDiff-Evolved
+	url = https://github.com/eeylomwjb/ComfyUI-AnimateDiff-Evolved.git
+[submodule "custom_nodes/ComfyUI-Manager"]
+	path = custom_nodes/ComfyUI-Manager
+	url = https://github.com/eeylomwjb/ComfyUI-Manager.git
+[submodule "custom_nodes/ComfyUI-VideoHelperSuite"]
+	path = custom_nodes/ComfyUI-VideoHelperSuite
+	url = https://github.com/eeylomwjb/ComfyUI-VideoHelperSuite.git
+[submodule "custom_nodes/images-grid-comfy-plugin"]
+	path = custom_nodes/images-grid-comfy-plugin
+	url = https://github.com/eeylomwjb/images-grid-comfy-plugin.git
+[submodule "custom_nodes/ComfyUI-Advanced-ControlNet"]
+	path = custom_nodes/ComfyUI-Advanced-ControlNet
+	url = https://github.com/eeylomwjb/ComfyUI-Advanced-ControlNet.git
+[submodule "custom_nodes/ComfyUI_FizzNodes"]
+	path = custom_nodes/ComfyUI_FizzNodes
+	url = https://github.com/eeylomwjb/ComfyUI_FizzNodes.git
+[submodule "custom_nodes/efficiency-nodes-comfyui"]
+	path = custom_nodes/efficiency-nodes-comfyui
+	url = https://github.com/eeylomwjb/efficiency-nodes-comfyui.git
+[submodule "custom_nodes/comfyui_controlnet_aux"]
+	path = custom_nodes/comfyui_controlnet_aux
+	url = https://github.com/eeylomwjb/comfyui_controlnet_aux.git
