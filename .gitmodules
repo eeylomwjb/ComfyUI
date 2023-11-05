@@ -22,3 +22,6 @@
 [submodule "custom_nodes/comfyui_controlnet_aux"]
 	path = custom_nodes/comfyui_controlnet_aux
 	url = https://github.com/eeylomwjb/comfyui_controlnet_aux.git
+[submodule "custom_nodes/comfy-image-saver"]
+	path = custom_nodes/comfy-image-saver
+	url = https://github.com/eeylomwjb/comfy-image-saver
