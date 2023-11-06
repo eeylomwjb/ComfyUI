@@ -45,16 +45,32 @@ MAX_RESOLUTION=8192
 class CLIPTextEncode:
     @classmethod
     def INPUT_TYPES(s):
-        return {"required": {"text": ("STRING", {"multiline": True}), "clip": ("CLIP", )}}
+        return {"required": {"text": ("STRING", {"multiline": True}), "clip": ("CLIP",)}}
+
     RETURN_TYPES = ("CONDITIONING",)
     FUNCTION = "encode"
 
     CATEGORY = "conditioning"
 
     def encode(self, clip, text):
-        tokens = clip.tokenize(text)
-        cond, pooled = clip.encode_from_tokens(tokens, return_pooled=True)
-        return ([[cond, {"pooled_output": pooled}]], )
+        if isinstance(text, list):
+            batched_cond = []
+            batched_pooled = []
+
+            for single_text in text:
+                tokens = clip.tokenize(single_text)
+                cond, pooled = clip.encode_from_tokens(tokens, return_pooled=True)
+                batched_cond.append(cond)
+                batched_pooled.append({"pooled_output": pooled})
+
+            # Stack along a new dimension to create a batched tensor
+            batched_cond_tensor = torch.stack(batched_cond, dim=0).squeeze(1)
+
+            return ([[batched_cond_tensor, {"pooled_output": batched_pooled}]],)
+        else:
+            tokens = clip.tokenize(text)
+            cond, pooled = clip.encode_from_tokens(tokens, return_pooled=True)
+            return ([[cond, {"pooled_output": pooled}]],)
 
 class ConditioningCombine:
     @classmethod
@@ -934,7 +950,7 @@ class LatentFromBatch:
         else:
             s["batch_index"] = samples["batch_index"][batch_index:batch_index + length]
         return (s,)
-    
+
 class RepeatLatentBatch:
     @classmethod
     def INPUT_TYPES(s):
@@ -949,7 +965,7 @@ class RepeatLatentBatch:
     def repeat(self, samples, amount):
         s = samples.copy()
         s_in = samples["samples"]
-        
+
         s["samples"] = s_in.repeat((amount, 1,1,1))
         if "noise_mask" in samples and samples["noise_mask"].shape[0] > 1:
             masks = samples["noise_mask"]
@@ -1278,7 +1294,7 @@ class SaveImage:
 
     @classmethod
     def INPUT_TYPES(s):
-        return {"required": 
+        return {"required":
                     {"images": ("IMAGE", ),
                      "filename_prefix": ("STRING", {"default": "ComfyUI"})},
                 "hidden": {"prompt": "PROMPT", "extra_pnginfo": "EXTRA_PNGINFO"},
