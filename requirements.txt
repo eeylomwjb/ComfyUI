@@ -10,3 +10,4 @@ Pillow
 scipy
 tqdm
 psutil
+protobuf==3.20.3
